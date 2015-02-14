@@ -374,6 +374,11 @@ section h3.section-subheading {
 }
 aside.clients img {
   margin: 50px auto;
+  opacity: 0.6;
+  transition: all 0.3s;
+}
+aside.clients img:hover {
+  opacity: 1;
 }
 section#contact {
   background-color: #222222;

@@ -55,6 +55,7 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0 auto;
 }
 
+
 .bg-light-gray {
 	background-color: @gray-lighter;
 }
@@ -349,7 +350,11 @@ section {
 aside.clients {
 	img {
 		margin: 50px auto;
+        opacity:0.6;
+        transition: all 0.3s;
+        &:hover{opacity:1;}
 	}
+    
 }
 
 // Contact Section
