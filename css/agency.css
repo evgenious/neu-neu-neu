@@ -10,7 +10,7 @@ body {
   color: black;
 }
 p {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.75;
 }
 p.large {
@@ -175,7 +175,7 @@ fieldset[disabled] .btn-xl.active {
 }
 .navbar-default .nav li a:hover,
 .navbar-default .nav li a:focus {
-  color: white;
+  color: #ff4e50;
   outline: none;
 }
 .navbar-default .navbar-nav > .active > a {
@@ -204,7 +204,7 @@ fieldset[disabled] .btn-xl.active {
     transition: all 0.3s;
   }
   .navbar-default .navbar-nav > .active > a {
-    border-bottom: 1px solid white;
+    border-bottom: 2px solid white;
   }
   .navbar-default.navbar-shrink {
     background-color: black;

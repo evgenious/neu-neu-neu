@@ -27,7 +27,7 @@ $('.navbar-collapse ul li a').click(function() {
 
 
 	function initialize() {
-	var mapOptions = {
+        var mapOptions = {
 		zoom: 18,
         scrollwheel: false,
         mapTypeControl: false,
@@ -102,7 +102,17 @@ $('.navbar-collapse ul li a').click(function() {
     }
 ]						
 	};
-	map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+        
+var iconBase = '../img/marker.png',
+marker = new google.maps.Marker({
+  position: new google.maps.LatLng(48.127465, 11.59797,17),
+  map: map,
+  icon: iconBase
+});
+    
+        
 }
 
 
