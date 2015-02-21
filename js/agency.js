@@ -1,120 +1,132 @@
-/*!
- * Start Bootstrap - Agency Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+var toggle,
+impressumToggle = false;      
 
-// jQuery for page scrolling feature - requires jQuery Easing plugin
-$(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
+//Slim
 
-// Highlight the top nav as scrolling occurs
-$('body').scrollspy({
-    target: '.navbar-fixed-top'
-})
-
-// Closes the Responsive Menu on Menu Item Click
-$('.navbar-collapse ul li a').click(function() {
-    $('.navbar-toggle:visible').click();
+$('.content').slimScroll({
+    position: 'right',
+    height: 'auto',
+    color:'#fff',
+    size:'5px',
+    railVisible: false,
+    alwaysVisible: false
 });
 
 
-	function initialize() {
-        var mapOptions = {
-		zoom: 18,
-        scrollwheel: false,
-        mapTypeControl: false,
-        disableDefaultUI: true,
-		center: new google.maps.LatLng(48.127465, 11.59797,17),
-		styles: [
-    {
-        "featureType": "all",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            },
-            {
-                "invert_lightness": true
-            },
-            {
-                "hue": "#000000"
-            },
-            {
-                "saturation": -100
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#1a1a1a"
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "color": "#474747"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "weight": 0.1
-            }
-        ]
-    }
-]						
-	};
+$('.start').click(function(){
+var el = $(this);
 
-map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-        
-var iconBase = '../img/marker.png',
-marker = new google.maps.Marker({
-  position: new google.maps.LatLng(48.127465, 11.59797,17),
-  map: map,
-  icon: iconBase
+if(el.hasClass("open")){   
+return;    
+} else {     
+slide(el,false);
+}   
+});
+
+
+$('.cbutton').click(function(){
+var el = $(this).parent(".start");
+    
+if($(this).hasClass("closex")){      
+slide(el,true);
+} else {  
+slide(el,false);    
+} 
+});
+
+
+
+function slide(el, toggle){
+    
+var btn = el.children("button");
+var height = el.height()-160; 
+this.ease =  [ 100, 16];   
+ 
+if(toggle === true){ 
+    
+btn.removeClass("closex").addClass("cbutton-click");      
+
+el.velocity("reverse",
+{complete: function() {el.removeClass("open");btn.removeClass("cbutton-click");}});
+el.children("span").velocity("reverse");
+el.children("a").velocity("reverse");
+    
+} else {
+    
+el.addClass("open");
+btn.addClass("cbutton-click closex");      
+
+el.velocity({
+marginTop: -height}, {
+duration:400, 
+delay:50, 
+easing: this.ease,
+complete: function() {btn.removeClass("cbutton-click");$(".content").css("height", height);}    
 });
     
-        
+el.children("a").velocity({
+translateY: "130px"},{
+duration:400, 
+delay:50, 
+easing: this.ease
+});
+    
+el.children("span").addClass("catHead").velocity({
+translateY: "130px",
+fontSize:"24px",
+fontWeight:"700"    
+},{
+duration:400, 
+delay:50, 
+easing: this.ease
+});
+    
+}
 }
 
+$(".closeBtn").click(function(){
+$(this).addClass("cbutton-click");      
+$(".impressumBtn").trigger( "click" );
+}) 
 
-
-						
+$(".impressumBtn").click(function(){
+      
+    
+if(impressumToggle === false){ 
+    
+var slideTiles = "<div class='row row-no-padding slide-tiles'><div class='col-md-3 col-md-offset-3'></div><div class='col-md-3'></div><div class='col-md-3'></div>";   
+    
+$("body").find(".row:first-of-type").after(slideTiles);
+    
+$("body").find(".slide-tiles div:nth-child(1)").velocity({skewY:"35deg"},{duration:0});
+$("body").find(".slide-tiles div:nth-child(2)").velocity({skewY:"-35deg"},{duration:0});
+$("body").find(".slide-tiles div:nth-child(3)").velocity({skewY:"-35deg"},{duration:0});      
+    
+$("body").find(".slide-tiles").children("div").each(function (i) { 
+$(this).velocity({
+top: "-100%",
+position:"fixed",
+skewY:"0deg" 
+},{
+duration:400, 
+delay:i*30, 
+complete: function() {if(i>=2){ 
+$(".impressum").velocity({ opacity: 1 }, { display: "block" },{duration:50});
+}},    
+easing: "easeOut"
+});
+});
+impressumToggle = true;            
+} else { 
+$(".impressum").velocity({ opacity: 0 },{ display: "none", duration:0 }); 
+$("body").find(".slide-tiles").children("div").each(function (i) { 
+$(this).velocity("reverse",
+{complete: function() {if(i>=2){ 
+$("body").find(".slide-tiles").remove();
+$(".closeBtn").removeClass("cbutton-click");    
+}}}
+);           
+})
+impressumToggle = false; 
+}
+})
