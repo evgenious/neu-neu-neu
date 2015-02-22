@@ -12,6 +12,12 @@ $('.content').slimScroll({
     alwaysVisible: false
 });
 
+if (Modernizr.mq('only all and (max-width: 1024)')) {
+console.log("Hallo");    
+$(".content").slimScroll({destroy: true});
+alert("Bam");    
+}
+
 
 $('.start').click(function(){
 var el = $(this);
