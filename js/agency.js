@@ -16,6 +16,7 @@ $('.content').slimScroll({
     alwaysVisible: false
 });
 
+
     
 if ( w < 768) {
     $('.content').slimScroll({destroy: true});
@@ -24,6 +25,14 @@ if ( w < 768) {
     
 $('.start').click(function () {
     var el = $(this);
+
+if (Modernizr.mq('only all and (max-width: 1024)')) {
+console.log("Hallo");    
+$(".content").slimScroll({destroy: true});
+alert("Bam");    
+}
+
+
 
     if (el.hasClass("open")) {
         return;
