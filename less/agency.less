@@ -1,10 +1,10 @@
 // out: ../css/agency.css, compress: true, strictMath: true
 @import "variables.less";
 @import "mixins.less";
-
 // Global Components 
-//test
-html, body {
+
+html,
+body {
     overflow: hidden;
     background-color: @brand-primary;
     .body-font();
@@ -27,9 +27,9 @@ html, body {
 
 #start {
     height: 100%;
-
-    .row, .col-md-3 { height: 100%; }
-
+    .row, .col-md-3 {
+        height: 100%;
+    }
     .content {
         height: 100%;
         text-align: center;
@@ -40,14 +40,12 @@ html, body {
 
 .sidebar {
     position: relative;
-
     h2 {
         line-height: 1.25;
         margin: 30px 0 0 30px;
         letter-spacing: 1px;
         font-size: 28px;
     }
-
     ul {
         position: absolute;
         bottom: 30px;
@@ -56,18 +54,17 @@ html, body {
         font-size: 14px;
         list-style: none;
         padding-left: 30px;
-
         li {
             font-weight: 700;
             margin-bottom: 2px;
-
             a {
                 display: block;
                 width: 100%;
                 height: 100%;
                 transition: all 0.2s;
-
-                &:hover { transform: skewX(-20deg); }
+                &:hover {
+                    transform: skewX(-20deg);
+                }
             }
         }
     }
@@ -82,7 +79,6 @@ html, body {
     transition: background-position 0.4s ease-out;
     position: relative;
     cursor: pointer;
-
     .cat {
         position: absolute;
         bottom: 130px;
@@ -91,23 +87,33 @@ html, body {
         font-weight: 700;
         font-size: 18px;
     }
-
-    &:hover { background-position: center 80px; }
+    &:hover {
+        background-position: center 80px;
+    }
 }
 
 .start.open {
     pointer-events: none;
-
-    button { pointer-events: all; outline: none !important;}
-    
-    button:active {outline:none !important;}
+    button {
+        pointer-events: all;
+        outline: none !important;
+    }
+    button:active {
+        outline: none !important;
+    }
 }
 
-.first { background-image: url(../img/first.svg); }
+.first {
+    background-image: url(../img/first.svg);
+}
 
-.second { background-image: url(../img/second.svg); }
+.second {
+    background-image: url(../img/second.svg);
+}
 
-.third { background-image: url(../img/third.svg); }
+.third {
+    background-image: url(../img/third.svg);
+}
 
 .row-no-padding [class*="col-"] {
     padding-left: 0 !important;
@@ -115,7 +121,8 @@ html, body {
 }
 
 //crazy click
-.closeBtn, .cbutton {
+.closeBtn,
+.cbutton {
     position: absolute;
     bottom: 60px;
     left: 50%;
@@ -130,34 +137,35 @@ html, body {
     border: 2px solid white;
     transition: color 0.7s;
     background-color: transparent;
-    &:hover::after{
-    opacity:0.3;
+    &:hover::after {
+        opacity: 0.3;
     }
-    
 }
 
-.cbutton.closex { background-image: url(../img/close.svg); }
+.cbutton.closex {
+    background-image: url(../img/close.svg);
+}
 
 .closeBtn::after,
 .cbutton::after {
-	content: '';
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin: -50% 0 0 -50% ;
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-	pointer-events: none;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -50% 0 0 -50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    pointer-events: none;
     opacity: 0;
-    background: rgba(111,111,111,0.5);
+    background: rgba(111, 111, 111, 0.5);
     transition: opacity 0.2s;
 }
 
 .cbutton-click::after {
     -webkit-animation: anim-click 0.5s forwards;
     animation: anim-click 0.5s forwards;
-    background: rgba(111,111,111,0.5);
+    background: rgba(111, 111, 111, 0.5);
 }
 
 @-webkit-keyframes anim-click {
@@ -166,7 +174,6 @@ html, body {
         -webkit-transform: scale3d(0.1, 0.1, 1);
         transform: scale3d(0.1, 0.1, 1);
     }
-
     100% {
         opacity: 0;
         -webkit-transform: scale3d(6, 6, 1);
@@ -180,7 +187,6 @@ html, body {
         -webkit-transform: scale3d(0.1, 0.1, 1);
         transform: scale3d(0.1, 0.1, 1);
     }
-
     100% {
         opacity: 0;
         -webkit-transform: scale3d(6, 6, 1);
@@ -201,17 +207,21 @@ p.name {
     line-height: 1.4;
     font-weight: 400;
     transition: all 0.2s;
-
     a {
         display: block;
         color: white;
         font-weight: 700;
     }
-
-    &:hover { transform: skewX(-20deg); }
+    &:hover {
+        transform: skewX(-20deg);
+    }
 }
 
-a, a:hover, a:focus, a:active, a.active {
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
     outline: none;
     color: white;
 }
@@ -221,7 +231,6 @@ a, a:hover, a:focus, a:active, a.active {
     width: 100%;
     height: auto;
     margin-top: 40px;
-
     img {
         width: 80px;
         height: auto;
@@ -238,14 +247,13 @@ a, a:hover, a:focus, a:active, a.active {
     padding-top: 30px;
     overflow-y: scroll;
     height: 100%;
-
-    b { display: block; }
-
+    b {
+        display: block;
+    }
     h2 {
         margin-left: 30px;
         margin-top: 0;
     }
-
     .closeBtn {
         background-image: url(../img/closeB.svg);
         top: 30px;
@@ -259,13 +267,13 @@ a, a:hover, a:focus, a:active, a.active {
 .impressumBtn {
     cursor: pointer;
     transition: all 0.2s;
-
-    &:hover { transform: skewX(-20deg); }
+    &:hover {
+        transform: skewX(-20deg);
+    }
 }
 
 .slide-tiles {
     z-index: 999;
-
     div {
         background-color: white;
         opacity: 1;
@@ -274,17 +282,28 @@ a, a:hover, a:focus, a:active, a.active {
     }
 }
 
-a:hover, a:focus, a:active, a.active { color: white; }
+a:hover,
+a:focus,
+a:active,
+a.active {
+    color: white;
+}
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     .heading-font();
     font-weight: 700;
 }
 
-.img-centered { margin: 0 auto; }
+.img-centered {
+    margin: 0 auto;
+}
 
 // Highlight Color Customization
-
 ::-moz-selection {
     text-shadow: none;
     background: @brand-primary;
@@ -306,27 +325,35 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: @brand-primary;
 }
-.mobileVisual {display: none;}
- .mobile {display: none;}
+
+.mobileVisual {
+    display: none;
+}
+
+.mobile {
+    display: none;
+}
+
+
+// Mobile
 
 @media(max-width:768px) {
-    html, body { 
-        overflow: auto; 
-        height: auto,
-    }
-    
-    #start {
-    height: auto ;
-
-    .row, .col-md-3 { height: auto; }
-
-    .content {
-        height: auto;
+    html, body {
         overflow: auto;
+        height: auto;
         overflow-x: hidden;
     }
+    #start {
+        height: auto;
+        .row, .col-md-3 {
+            height: auto;
+        }
+        .content {
+            height: auto;
+            overflow: auto;
+            overflow-x: hidden;
+        }
     }
-    
     .start {
         display: none;
     }
@@ -334,30 +361,26 @@ body {
         display: none;
     }
     .sidebar {
-    position: relative;
-        
-
-    h2 {
-        line-height: 1.25;
-        margin: 30px 0 0 15px;
-        letter-spacing: 1px;
-        font-size: 28px;
-        display: block;
-    }
-
-    ul {
         position: relative;
-        font-size: 14px;
-        list-style: none;
-        padding-left: 15px;
-        margin: 50px 0 0 0;
-        li {
-            font-weight: 700;
-            margin-bottom: 2px;
+        h2 {
+            line-height: 1.25;
+            margin: 30px 0 0 15px;
+            letter-spacing: 1px;
+            font-size: 28px;
+            display: block;
+        }
+        ul {
+            position: relative;
+            font-size: 14px;
+            list-style: none;
+            padding-left: 15px;
+            margin: 50px 0 0 0;
+            li {
+                font-weight: 700;
+                margin-bottom: 2px;
+            }
         }
     }
-    }
-    
     .mobile {
         font-weight: bold;
         line-height: 1.25;
@@ -366,34 +389,61 @@ body {
         font-size: 28px;
         display: block;
     }
+    .sidebar {
+        ul {
+            display: none;
+        }
+    }
+    .impressum {background: white;}
     
+    #footer {
+        ul {
+            display: block;
+            bottom: 30px;
+            left: 0;
+            margin: 0;
+            font-size: 18px;
+            padding-left: 0px;
+            li {
+                margin: 20px 0 20px 0;
+                text-align: center;
+            }
+        }
+    }
     .mobileVisual {
         margin: 20px 0 0 0;
-        display: block;        
+        display: block;
         height: 95vw;
         width: 100%;
-       
         col-xs-4 {}
-        
-        .first { background-image: url(../img/first.svg); height: 100%;  background-repeat: no-repeat;
-        background-position: center top;}
-        .second { background-image: url(../img/second.svg); height: 100%;  background-repeat: no-repeat;
-        background-position: center top;}
-        .third { background-image: url(../img/third.svg); height: 100%;  background-repeat: no-repeat;
-        background-position: center top;}
+        .first {
+            background-image: url(../img/first.svg);
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: center top;
         }
-    
+        .second {
+            background-image: url(../img/second.svg);
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: center top;
+        }
+        .third {
+            background-image: url(../img/third.svg);
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: center top;
+        }
+    }
     .partner {
         float: left;
-    width: 49%;
-     margin: 30px 0 30px 0;
+        width: 50%;
+        margin: 30px 0 30px 0;
         display: block;
         overflow: auto;
-    img {
-        width: 80px;
-        height: 60px;
+        img {
+            width: 80px;
+            height: 60px;
+        }
     }
 }
-    
-}
-
