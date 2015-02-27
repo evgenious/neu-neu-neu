@@ -2,21 +2,22 @@ var toggle,
     impressumToggle = true,
     myImpressum = new impressumSlide();
 
-//var w = window.innerWidth;
-//var h = window.innerHeight;
-
-$(document).ready(function () { 
-checkCustomScroll();   
+$(document).ready(function () {
+if (Modernizr.mq('screen and (min-width: 1025px)')) {     
+addCustomScroll();
+}    
 });
 
 $(window).resize(function() {
-checkCustomScroll();  
+if (Modernizr.mq('screen and (min-width: 1025px)')) {    
+addCustomScroll();}else{
+removeCustomScroll();
+} 
 });
 
 
 //Slim-------------------------------
-function checkCustomScroll(){  
-if (Modernizr.mq('screen and (min-width: 1025px)')) { 
+function addCustomScroll(){   
 $('.content').slimScroll({
     position: 'right',
     height: 'auto',
@@ -25,13 +26,12 @@ $('.content').slimScroll({
     railVisible: false,
     alwaysVisible: false
 });
-}
-
-if (Modernizr.mq('screen and (max-width: 1024px)') ){
-    $('.content').slimScroll({destroy: true});
-    $('.content').attr('style', '');
-}
 } 
+
+function removeCustomScroll(){
+$('.content').slimScroll({destroy: true});
+$('.content').attr('style', '');
+}
 
 //Impressum-------------------------------
 
