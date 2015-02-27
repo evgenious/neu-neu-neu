@@ -1,12 +1,22 @@
 var toggle,
-    impressumToggle = false;
+    impressumToggle = true,
+    myImpressum = new impressumSlide();
 
-var w = window.innerWidth;
-var h = window.innerHeight;
+//var w = window.innerWidth;
+//var h = window.innerHeight;
 
-//Slim
- 
+$(document).ready(function () { 
+checkCustomScroll();   
+});
 
+$(window).resize(function() {
+checkCustomScroll();  
+});
+
+
+//Slim-------------------------------
+function checkCustomScroll(){  
+if (Modernizr.mq('screen and (min-width: 1025px)')) { 
 $('.content').slimScroll({
     position: 'right',
     height: 'auto',
@@ -15,37 +25,41 @@ $('.content').slimScroll({
     railVisible: false,
     alwaysVisible: false
 });
+}
 
-
-    
-if ( w < 768) {
+if (Modernizr.mq('screen and (max-width: 1024px)') ){
     $('.content').slimScroll({destroy: true});
     $('.content').attr('style', '');
 }
-    
-$('.start').click(function () {
-    var el = $(this);
+} 
 
-if (Modernizr.mq('only all and (max-width: 1024)')) {
-  
-$(".content").slimScroll({destroy: true});
-  
+//Impressum-------------------------------
+
+$(".impressumBtn, .closeBtn").click(function() {
+impressumToggle = !impressumToggle;
+if(Modernizr.mq('screen and (min-width: 768px)')){    
+myImpressum.desktop();
+} else {
+myImpressum.mobile();
 }
-
-
-
-    if (el.hasClass("open")) {
-        return;
-    } else {
-        slide(el, false);
-    }
 });
 
 
-$('.cbutton').click(function () {
-    var el = $(this).parent(".start");
 
-    if ($(this).hasClass("closex")) {
+//Klick Neu-------------------------------
+$('.start').click(function () {
+var el = $(this);
+if (el.hasClass("open")) {
+return;
+    } else {
+slide(el, false);
+    }
+});
+
+//Klick Button -------------------------------
+$('.cbutton').click(function () {
+var el = $(this).parent(".start");
+if ($(this).hasClass("closex")) {
         slide(el, true);
     } else {
         slide(el, false);
@@ -111,76 +125,45 @@ function slide(el, toggle) {
     }
 }
 
-$(".closeBtn").click(function () {
-    $(this).addClass("cbutton-click");
-    $(".impressumBtn").trigger("click");
-})
 
-$(".impressumBtn").click(function () {
-
-
+function impressumSlide(){   
+    
+    this.desktop = function(){
+    console.log (impressumToggle);   
     if (impressumToggle === false) {
 
         var slideTiles = "<div class='row row-no-padding slide-tiles'><div class='col-md-3 col-md-offset-3'></div><div class='col-md-3'></div><div class='col-md-3'></div>";
 
         $("body").find(".row:first-of-type").after(slideTiles);
 
-        $("body").find(".slide-tiles div:nth-child(1)").velocity({
-            skewY: "35deg"
-        }, {
-            duration: 0
-        });
-        $("body").find(".slide-tiles div:nth-child(2)").velocity({
-            skewY: "-35deg"
-        }, {
-            duration: 0
-        });
-        $("body").find(".slide-tiles div:nth-child(3)").velocity({
-            skewY: "-35deg"
-        }, {
-            duration: 0
-        });
+        $("body").find(".slide-tiles div:nth-child(1)").velocity({skewY: "35deg"}, {duration: 0});
+        $("body").find(".slide-tiles div:nth-child(2)").velocity({skewY: "-35deg"}, {duration: 0});
+        $("body").find(".slide-tiles div:nth-child(3)").velocity({skewY: "-35deg"}, {duration: 0});
 
         $("body").find(".slide-tiles").children("div").each(function (i) {
-            $(this).velocity({
-                top: "-100%",
-                position: "fixed",
-                skewY: "0deg"
-            }, {
-                duration: 400,
-                delay: i * 30,
-                complete: function () {
-                    if (i >= 2) {
-                        $(".impressum").velocity({
-                            opacity: 1
-                        }, {
-                            display: "block"
-                        }, {
-                            duration: 50
-                        });
-                    }
-                },
-                easing: "easeOut"
-            });
+        $(this).velocity({top: "-100%", position: "fixed", skewY: "0deg"}, 
+        {duration: 400,delay: i * 30,complete: function () {
+        if (i >= 2) {$(".impressum").velocity({opacity: 1}, {display: "block", duration: 50});}}, easing: "easeOut"});
         });
-        impressumToggle = true;
+        
     } else {
-        $(".impressum").velocity({
-            opacity: 0
-        }, {
-            display: "none",
-            duration: 0
-        });
+        console.log("close");
+        $(".impressum").velocity({opacity: 0}, {display: "none",duration: 0});
         $("body").find(".slide-tiles").children("div").each(function (i) {
-            $(this).velocity("reverse", {
-                complete: function () {
-                    if (i >= 2) {
-                        $("body").find(".slide-tiles").remove();
-                        $(".closeBtn").removeClass("cbutton-click");
-                    }
-                }
-            });
-        })
-        impressumToggle = false;
+        $(this).velocity("reverse", {complete: function () {
+        if (i >= 2) {$("body").find(".slide-tiles").remove();
+        $(".closeBtn").removeClass("cbutton-click");
+        }}});})
     }
-})
+    }
+    
+    this.mobile = function(){
+    $(".impressum").velocity({marginTop: "20px"}, {duration: 0});    
+    if (impressumToggle === false) {  
+    $(".impressum").velocity({opacity: 1, marginTop: "0"}, {display: "block", duration: 200});    
+    } else {
+    $(".impressum").velocity({opacity: 0, marginTop: "20px"}, {display: "none", duration: 200});
+    $(".closeBtn").removeClass("cbutton-click");    
+    }    
+    }
+}
